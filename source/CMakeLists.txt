@@ -14,3 +14,12 @@ target_link_libraries(synSecond ${OpenCV_LIBS} curl)
 
 add_executable(ircut ircut.cpp)
 target_link_libraries(showCam ${OpenCV_LIBS} curl)
+
+add_executable(capIRcut capIRcut.cpp)
+target_link_libraries(showCam ${OpenCV_LIBS} curl stdc++fs)
+
+add_executable(capPattern capPattern.cpp)
+target_link_libraries(showCam ${OpenCV_LIBS} curl stdc++fs)
+
+add_executable(capPatIRcut capPatIRcut.cpp)
+target_link_libraries(showCam ${OpenCV_LIBS} curl stdc++fs)

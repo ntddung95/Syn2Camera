@@ -53,6 +53,11 @@ void offPatterIR(){
 
 int main(int argc, char **argv){
 
+	int m = atoi(argv[3]);
+	int x = atoi(argv[4])*1000;
+	int n = atoi(argv[5]);
+	int y = atoi(argv[6])*1000;
+
 	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         printf("\n Socket creation error \n");
@@ -76,7 +81,7 @@ int main(int argc, char **argv){
 	char rtspStream[100];
 	namedWindow("Show Video",WINDOW_NORMAL);
 	sprintf(rtspStream,"rtsp://admin:1111@%s:554",argv[1]);
-	int offset = atoi(argv[3])*1000;
+	
 	VideoCapture vid(rtspStream);
 	if(!vid.isOpened()){
 		cout << "Unable stream\n";
@@ -92,12 +97,17 @@ int main(int argc, char **argv){
 	while(true){
 		vid >> img;
 		if (count % 10 == 9){
-			usleep(offset);
+			usleep(x);
 			onPattern();
+		}
+		if (count %10 == (9-(m-n))){
+			usleep(y);
+			setIRCut(true);
 		}
 
 		if (count % 10 == 5){
 			offPattern();
+			setIRCut(false);
 		}
 		sprintf(imgSave,"CapIR/%06d.jpg",count);
 		imshow("Show Video",img);
